@@ -13,7 +13,7 @@ st.set_page_config(
 #Adatok betöltése
 @st.cache_data
 def load_data():
-    df = pd.read_excel("challenge 2026.xlsx", skiprows=3)
+    df = pd.read_excel("challenge 2026 12.xlsx", skiprows=3)
     df = df.iloc[:, 1:]
     cols = list(df.columns)
     cols[0] = "Név"
