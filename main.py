@@ -222,10 +222,6 @@ with col1:
 
     st.plotly_chart(fig, width='stretch')
 
-    #7. Oszlopdiagram az aktuális kg értékekkel
-    fig = create_barplot(df_preprocessed)
-    st.plotly_chart(fig, width='stretch')
-with col2:
     #8. Plotly vonaldiagram %-os fogyásra
     df_percent = df_preprocessed.filter(regex=r'%$')
     fig_percent = px.line(df_percent.T, markers=True)
@@ -241,6 +237,13 @@ with col2:
             )
         )
     st.plotly_chart(fig_percent, width='stretch')
+    
+with col2:
+    #7. Oszlopdiagram az aktuális kg értékekkel
+    fig = create_barplot(df_preprocessed)
+    st.plotly_chart(fig, width='stretch')
+    
+    
     
     #9. Plotly vonaldiagram kg-okra
     fig = create_line_plot(df)
