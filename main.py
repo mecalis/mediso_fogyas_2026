@@ -203,46 +203,48 @@ with col4:
 #6. A verseny aktuális állása
 st.write("A verseny aktuális állása:")
 
-fig = px.bar(
-    df_progress,
-    x="Előrehaladás",
-    y=df_progress.index,
-    orientation="h",
-    range_x=[df_progress["Előrehaladás"].min(),df_progress["Előrehaladás"].max()],
-    title="Fogyási cél teljesítése (%)",
-    text="Előrehaladás"
-)
-
-fig.update_traces(
-    texttemplate="%{text:.1f}",
-    textposition="inside"
-)
-
-st.plotly_chart(fig, width='stretch')
-
-#7. Oszlopdiagram az aktuális kg értékekkel
-fig = create_barplot(df_preprocessed)
-st.plotly_chart(fig, width='stretch')
-
-#8. Plotly vonaldiagram %-os fogyásra
-df_percent = df_preprocessed.filter(regex=r'%$')
-fig_percent = px.line(df_percent.T, markers=True)
-fig_percent.update_layout(
-        title="A testsúly változása százalékban:",
-        height=400,
-        width=800,
-        xaxis_title="Hét",
-        yaxis_title="Változás mértéke(%)",
-        legend=dict(
-            itemclick="toggle",
-            itemdoubleclick="toggleothers"
-        )
+col1, col2 = st.columns(2)
+with col1:
+    fig = px.bar(
+        df_progress,
+        x="Előrehaladás",
+        y=df_progress.index,
+        orientation="h",
+        range_x=[df_progress["Előrehaladás"].min(),df_progress["Előrehaladás"].max()],
+        title="Fogyási cél teljesítése (%)",
+        text="Előrehaladás"
     )
-st.plotly_chart(fig_percent, width='stretch')
 
-#9. Plotly vonaldiagram kg-okra
-fig = create_line_plot(df)
-st.plotly_chart(fig, use_container_width=True)
+    fig.update_traces(
+        texttemplate="%{text:.1f}",
+        textposition="inside"
+    )
+
+    st.plotly_chart(fig, width='stretch')
+
+    #7. Oszlopdiagram az aktuális kg értékekkel
+    fig = create_barplot(df_preprocessed)
+    st.plotly_chart(fig, width='stretch')
+with col2:
+    #8. Plotly vonaldiagram %-os fogyásra
+    df_percent = df_preprocessed.filter(regex=r'%$')
+    fig_percent = px.line(df_percent.T, markers=True)
+    fig_percent.update_layout(
+            title="A testsúly változása százalékban:",
+            height=400,
+            width=800,
+            xaxis_title="Hét",
+            yaxis_title="Változás mértéke(%)",
+            legend=dict(
+                itemclick="toggle",
+                itemdoubleclick="toggleothers"
+            )
+        )
+    st.plotly_chart(fig_percent, width='stretch')
+    
+    #9. Plotly vonaldiagram kg-okra
+    fig = create_line_plot(df)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 #10. Táblázat
