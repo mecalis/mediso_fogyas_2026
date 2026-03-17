@@ -224,8 +224,8 @@ with col2:
     #7. Oszlopdiagram az aktuális kg értékekkel
     fig = create_barplot(df_preprocessed)
     st.plotly_chart(fig, width='stretch')
-    
-    
+
+    st.write("")
     
     #9. Plotly vonaldiagram kg-okra
     fig = create_line_plot(df)
