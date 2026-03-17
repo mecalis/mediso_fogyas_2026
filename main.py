@@ -203,7 +203,7 @@ with col1:
     )
 
     st.plotly_chart(fig, width='stretch')
-
+    st.write("(Tipp: kattints magadon duplán, hogy látványosabb legyen a saját haladásod!)")
     #8. Plotly vonaldiagram %-os fogyásra
     df_percent = df_preprocessed.filter(regex=r'%$')
     fig_percent = px.line(df_percent.T, markers=True)
