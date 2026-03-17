@@ -201,6 +201,12 @@ with col1:
         textposition="inside",
         hovertemplate="<b>%{y}</b><br>" + "Előrehaladás: %{x:.1f}%<extra></extra>"
     )
+    fig.add_vline(
+        x=100,
+        line_color="red",
+        line_width=2,
+        line_dash="dash"
+    )
 
     st.plotly_chart(fig, width='stretch')
     st.write("(Tipp: kattints magadon duplán, hogy látványosabb legyen a saját haladásod!⬇️)")
