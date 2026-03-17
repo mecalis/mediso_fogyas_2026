@@ -164,6 +164,7 @@ df_progress=df_progress.set_index("Név")
 
 #4. Első sorban cím
 st.title("A Nagy Fogyás 2026 Tavasz - Mediso")
+st.divider()
 st.write("A legutolsó hét bajnokai!:")
 #5. KPI számítása és megjelenítése
 col1, col2, col3, col4 = st.columns(4)
@@ -180,7 +181,7 @@ with col3:
 
 with col4:
     metric_min = st.metric("🏆 Aki a legtávolabb van a céltól", min_name, f"{min_value:.1f} %")    
-
+st.divider()
 #6. A verseny aktuális állása
 st.write("A verseny aktuális állása:")
 
@@ -237,6 +238,7 @@ with col2:
     fig = create_line_plot(df)
     st.plotly_chart(fig, use_container_width=True)
 
+st.divider()
 #10. Táblázat
 st.write("A részletes mérési adatok:")
 row_height = 35
@@ -244,6 +246,7 @@ header_height = 38
 height = header_height + row_height * len(df_preprocessed)
 st.dataframe(df_preprocessed, height=height)
 
+st.divider()
 #11. Tippek df megjelenítése
 st.write("A versenyre leadott tippek:")
 num_cols = df_tippek.select_dtypes(include="number").columns
