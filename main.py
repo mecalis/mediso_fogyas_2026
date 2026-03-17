@@ -164,11 +164,10 @@ df_progress=df_progress.set_index("Név")
 
 #4. Első sorban cím
 st.title("A Nagy Fogyás 2026 Tavasz - Mediso")
-
+st.write("A legutolsó hét bajnokai!:")
 #5. KPI számítása és megjelenítése
 col1, col2, col3, col4 = st.columns(4)
 max_name, max_value, min_name, min_value = calc_kpis(df)
-st.write("A legutolsó hét bajnokai!:")
 with col1:
     metric_max = st.metric("🏆 A legtöbb fogyás kg-ban", max_name, f"{max_value:.1f} kg")
 
