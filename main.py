@@ -217,7 +217,8 @@ with col1:
 
     fig.update_traces(
         texttemplate="%{text:.1f}",
-        textposition="inside"
+        textposition="inside",
+        hovertemplate="<b>%{y}</b><br>" + "Előrehaladás: %{x:.1f}%<extra></extra>"
     )
 
     st.plotly_chart(fig, width='stretch')
