@@ -23,8 +23,6 @@ def load_data():
     df = df.dropna(axis=1, how="all")
     #df["date"] = pd.to_datetime(df["date"])
     df = df.set_index("Név")
-    
-    print("Aktuális cols:", df.columns)
     return df
 
 def color_yes_no(val):
@@ -45,17 +43,12 @@ def load_tips():
 @st.cache_data
 def load_goals():
     df_goals = pd.read_csv("challenge 2026_celertek.xlsx")
-    print(df_goals)
-
+    return df_goals
 
 @st.cache_data
 def create_table(df):
-    
     df_preprocessed = df.copy()
     cols = df_preprocessed.filter(regex=r'^\d').columns
-    print("df_preprocessed cols:")
-    print(cols)
-
     for i, col in enumerate(cols):
         if i == 0:
             continue
@@ -64,7 +57,6 @@ def create_table(df):
         new_col_name = new_col_name + "%"
         df_preprocessed[new_col_name] = (df_preprocessed[cols[i]] - df_preprocessed[cols[0]]) / df_preprocessed[cols[0]] *100
     df_preprocessed["teljes fogyás"] = df_preprocessed[cols[-1]] - df_preprocessed[cols[0]]
-
     return df_preprocessed
 
 def calc_kpis(df_in):
@@ -98,27 +90,19 @@ def calc_kpis3(df_in):
 def create_line_plot(df):
     weeks = list(df.columns)
 
-    # színek generálása
-    colors = sample_colorscale("Viridis", [i/(len(df.index)-1) if len(df.index)>1 else 0 for i in range(len(df.index))])
-
     fig = go.Figure()
-
     for i, person in enumerate(df.index):
-
         weights = df.loc[person].values
-
         hovertemplate = (
             "Név: %{customdata}<br>"
             "Hét: %{x}<br>"
             "Súly: %{y} kg<extra></extra>"
         )
-
         fig.add_trace(go.Scatter(
             x=weeks,
             y=weights,
             mode="lines+markers",
             name=person,
-            #line=dict(width=2, color=colors[i]),
             line=dict(width=2),
             customdata=[person]*len(weeks),
             hovertemplate=hovertemplate
@@ -133,7 +117,6 @@ def create_line_plot(df):
             itemdoubleclick="toggleothers"
         )
     )
-
     return fig
 
 #Plotly oszlopdiagram
@@ -149,7 +132,6 @@ def create_barplot(df_preprocessed):
     ]
 
     fig = go.Figure()
-
     fig.add_bar(
         x=df_plot.index,
         y=df_plot["teljes fogyás"],
@@ -179,7 +161,6 @@ df_progress["last_diff"] = df_progress['Kezdő súly'] - df_progress[last_col]
 df_progress["Előrehaladás"] = df_progress["last_diff"] / df_progress["diff"] * 100
 df_progress = df_progress.sort_values("Előrehaladás", ascending=True)
 df_progress=df_progress.set_index("Név")
-
 
 #4. Első sorban cím
 st.title("A Nagy Fogyás 2026 Tavasz - Mediso")
@@ -249,7 +230,6 @@ with col2:
     #9. Plotly vonaldiagram kg-okra
     fig = create_line_plot(df)
     st.plotly_chart(fig, use_container_width=True)
-
 
 #10. Táblázat
 st.write("A részletes mérési adatok:")
