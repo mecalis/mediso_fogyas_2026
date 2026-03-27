@@ -60,6 +60,9 @@ def create_table(df):
     return df_preprocessed
 
 def calc_kpis(df_in):
+    '''
+    Kiszámolja a legtöbb és a legkevesebb fogyást kg-ban az utolsó és az első hét differenciája alapján, azaz a versenyre nézve a TELJES fogyást.
+    '''
     df = df_in.copy()
     df["diff"] = df[df.columns[-1]]-df[df.columns[0]]
     df["diff"] = df["diff"] * (-1)
@@ -71,6 +74,7 @@ def calc_kpis(df_in):
     return max_name, max_value, min_name, min_value
 
 def calc_kpis2(df_in):
+    
     df_in = df_in * (-1)
     max_name = df_in.iloc[:, -2].idxmax()
     max_value = df_in.iloc[:, -2].max()
@@ -79,6 +83,9 @@ def calc_kpis2(df_in):
     return max_name, max_value, min_name, min_value
 
 def calc_kpis3(df_in):
+    '''
+    Kiszámolja, hogy a kitűzött cél hány százalékánál járnak a versenyzők.
+    '''
     df_in = df_in
     max_name = df_in.iloc[:, -1].idxmax()
     max_value = df_in.iloc[:, -1].max()
