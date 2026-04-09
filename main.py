@@ -93,7 +93,7 @@ def calc_kpis3(df_in):
     min_value = df_in.iloc[:, -1].min()
     return max_name, max_value, min_name, min_value
 
-#Plotly lineplot
+#Plotly lineplot - Súly alakulása
 def create_line_plot(df):
     weeks = list(df.columns)
 
@@ -117,7 +117,7 @@ def create_line_plot(df):
 
     fig.update_layout(
         title="Súly alakulása",
-        height=400,
+        height=800,
         width=800,
         legend=dict(
             itemclick="toggle",
@@ -223,7 +223,7 @@ with col1:
     fig_percent = px.line(df_percent.T, markers=True)
     fig_percent.update_layout(
             title="A testsúly változása százalékban:",
-            height=400,
+            height=800,
             width=800,
             xaxis_title="Hét",
             yaxis_title="Változás mértéke(%)",
